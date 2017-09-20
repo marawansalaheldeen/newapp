@@ -1,0 +1,63 @@
+<head>
+  <title>newapp</title>
+</head>
+
+<body>
+  <center>
+    <h1>Welcome to Meteor! <br>{{username}}</h1>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      {{> loginButtons}}
+    </div>
+  </nav>
+</center>
+  {{> image_add}}
+  {{> moron}}
+</body>
+<template name="image_add">
+  <div class="modal fade" id="image_add_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">
+          </div>
+        </div>
+        <div class="modal-body">
+          <form class="js-image-add" name="add">
+            <input type="text" name="img_src">
+            <input type="text" name="img_alt">
+            <button class="submit">save</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class = "btn btn-warning" data-dismiss="modal">cancel</button>
+        </div>
+        </div>
+    </div>
+  </div>
+
+
+</template>
+<template name= "moron">
+  {{#if currentUser}}
+  <button class="btn btn-success js_show_image_form">add image</button>
+  {{/if}}
+  <div class="caption">
+
+
+  {{#each img}}
+  <div class="col-xs-12 col-md-3" id={{_id}}>
+    <div class="thumbnail">
+        <img class="js-image" src="{{img_src}}" alt="{{img_alt}}"/>
+        <h3>Rating:{{rating}}</h3>
+        <h5>{{img_alt}}</h5>
+        <p>User:
+          <a href="#" class="js-user-filter">{{createdBy}}</a>
+        </p>
+        <p> {{> starsRating rating=rating  mutable=true id = "js-rate-im" class=_id }}</p>
+        <button class="js-delete btn btn-warning"  >delete</button>
+    </div>
+  </div>
+  {{/each}}
+  </div>
+</template>
